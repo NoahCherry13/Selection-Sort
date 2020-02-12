@@ -1,4 +1,4 @@
 
-public class Database {
+public class AllStudents {
 	
 }
