@@ -7,8 +7,8 @@ import javax.swing.*;
 
 
 
-public class SelectionGUI extends GBFrame implements ActionListener{
-
+public class SelectionGUI extends GBFrame{
+	
 	JMenuItem addMI = addMenuItem("Menu", "Add Student");
 	JMenuItem outputMI = addMenuItem("Menu", "Output");
 	JMenuItem editMI = addMenuItem("Menu", "Edit Student");
@@ -21,12 +21,20 @@ public class SelectionGUI extends GBFrame implements ActionListener{
 	JComboBox options = addComboBox(1, 2, 1, 1);
 	JList<String> StudentList = addList(4, 1, 2, 1);
 	JButton EnterNameButton = addButton("Enter",3,1,1,1);
+	JButton enterGradesButton = addButton("Enter Grade",2,1,1,1);
 
 	public SelectionGUI(){
-		options.addActionListener(this);
 		options.addItem("Test Grade");
 		options.addItem("Quiz Grade");
 		options.addItem("Homework Grade");
+		sortNameButton.setVisible(false);
+		sortGradesButton.setVisible(false);
+		LNameFld.setVisible(false);
+		ListArea.setVisible(false);
+		FNameFld.setVisible(false);
+		StudentList.setVisible(false);
+		EnterNameButton.setVisible(false);
+		enterGradesButton.setVisible(false);
 		sortNameButton.setVisible(false);
 		sortGradesButton.setVisible(false);
 		options.setVisible(false);
@@ -55,12 +63,7 @@ public class SelectionGUI extends GBFrame implements ActionListener{
 		bookList.setModel(DLM);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand() == ActionEvent.MOUSE_EVENT_MASK) {
-			
-		}
-		
-	}
+	
+	
 
 }
