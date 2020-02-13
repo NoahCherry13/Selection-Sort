@@ -1,19 +1,37 @@
 import BreezySwing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class SelectionGUI extends GBFrame {
+
+
+public class SelectionGUI extends GBFrame implements ActionListener{
 
 	JMenuItem addMI = addMenuItem("Menu", "Add Student");
 	JMenuItem outputMI = addMenuItem("Menu", "Output");
+	JMenuItem editMI = addMenuItem("Menu", "Edit Student");
 	ButtonGroup listOp = new ButtonGroup();
-	JRadioButton og = addRadioButton("Sort by Name", 3, 1, 1, 1);
-	JRadioButton sorted = addRadioButton("Sort by Grades", 3, 2, 1, 1);
+	JRadioButton sortNameButton = addRadioButton("Sort by Name", 1, 1, 1, 1);
+	JRadioButton sortGradesButton = addRadioButton("Sort by Grades", 1, 2, 1, 1);
 	JTextArea ListArea = addTextArea("", 4, 1, 2, 1);
 	JTextField FNameFld = addTextField("First Name", 1, 1, 1, 1);
 	JTextField LNameFld = addTextField("Last Name", 2, 1, 1, 1);
-	JList<String> StudentList = addList(2, 1, 1, 1);
+	JComboBox options = addComboBox(1, 2, 1, 1);
+	JList<String> StudentList = addList(4, 1, 2, 1);
+	JButton EnterNameButton = addButton("Enter",3,1,1,1);
 
+	public SelectionGUI(){
+		options.addActionListener(this);
+		options.addItem("Test Grade");
+		options.addItem("Quiz Grade");
+		options.addItem("Homework Grade");
+		sortNameButton.setVisible(false);
+		sortGradesButton.setVisible(false);
+		options.setVisible(false);
+	}
+	
 	public static void main(String[] args) {
 		JFrame frm = new SelectionGUI();
 		frm.setTitle("Ace Program");
@@ -35,6 +53,14 @@ public class SelectionGUI extends GBFrame {
 			DLM.addElement(b.getTitle());
 		}
 		bookList.setModel(DLM);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand() == ActionEvent.MOUSE_EVENT_MASK) {
+			
+		}
+		
 	}
 
 }
