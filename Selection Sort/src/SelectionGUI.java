@@ -2,6 +2,7 @@ import BreezySwing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -22,7 +23,13 @@ public class SelectionGUI extends GBFrame{
 	JList<String> StudentList = addList(4, 1, 2, 1);
 	JButton EnterNameButton = addButton("Enter",3,1,1,1);
 	JButton enterGradesButton = addButton("Enter Grade",2,1,1,1);
-
+	ArrayList<Student> studentSList;
+	ArrayList<Student> studentFList;
+	ArrayList<Student> studentLList;
+	AllStudents as = new AllStudents();
+	int count = 0;
+	
+	
 	public SelectionGUI(){
 		options.addItem("Test Grade");
 		options.addItem("Quiz Grade");
@@ -40,6 +47,18 @@ public class SelectionGUI extends GBFrame{
 		options.setVisible(false);
 	}
 	
+	public void setFList() {
+		studentFList = as.getFList();
+	}
+	
+	public void setLList() {
+		studentLList = as.getLList();
+	}
+	
+	public void setSList() {
+		studentSList = as.getSList();
+	}
+	
 	public static void main(String[] args) {
 		JFrame frm = new SelectionGUI();
 		frm.setTitle("Ace Program");
@@ -49,20 +68,63 @@ public class SelectionGUI extends GBFrame{
 
 	public void menuItemSelected(JMenuItem mi) {
 		if (mi == addMI) {
-
+			sortNameButton.setVisible(false);
+			sortGradesButton.setVisible(false);
+			LNameFld.setVisible(true);
+			ListArea.setVisible(true);
+			FNameFld.setVisible(true);
+			StudentList.setVisible(true);
+			EnterNameButton.setVisible(true);
+			enterGradesButton.setVisible(false);
+			sortNameButton.setVisible(false);
+			sortGradesButton.setVisible(false);
+			options.setVisible(false);
 		} else if (mi == outputMI) {
 
 		}
 	}
 	
-	private void populateList() {
-		DefaultListModel DLM = new DefaultListModel();
-		for (Books b : books) {
-			DLM.addElement(b.getTitle());
+	public void buttonClicked(JButton b) {
+		if (b == EnterNameButton) {
+			if (FNameFld.getText().isBlank()||LNameFld.getText().isBlank()) {
+				messageBox("Please Enter a First and Last Name");
+				return;
+			}
+			if (count >= 15) {
+				messageBox("Cannot enter more than 15 Students");
+				return;
+			}
+			as.addStudent(new Student(FNameFld.getText(),LNameFld.getText()));
+			count++;
+			as.sortFName();
+			setFList();
+			populateListFName();
 		}
-		bookList.setModel(DLM);
+	}
+	
+	private void populateListFName() {
+		DefaultListModel DLM = new DefaultListModel();
+		for (Student s : studentFList) {
+			DLM.addElement(s.getFName());
+		}
+		StudentList.setModel(DLM);
 	}
 
+	private void populateListLName() {
+		DefaultListModel DLM = new DefaultListModel();
+		for (Student s : studentFList) {
+			DLM.addElement(s.getLName());
+		}
+		StudentList.setModel(DLM);
+	}
+	
+	private void populateListScore() {
+		DefaultListModel DLM = new DefaultListModel();
+		for (Student s : studentFList) {
+			DLM.addElement(s.getAverage());
+		}
+		StudentList.setModel(DLM);
+	}
 	
 	
 
