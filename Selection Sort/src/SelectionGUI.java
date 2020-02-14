@@ -34,6 +34,8 @@ public class SelectionGUI extends GBFrame{
 		options.addItem("Test Grade");
 		options.addItem("Quiz Grade");
 		options.addItem("Homework Grade");
+		listOp.add(sortNameButton);
+		listOp.add(sortGradesButton);
 		sortNameButton.setVisible(false);
 		sortGradesButton.setVisible(false);
 		LNameFld.setVisible(false);
@@ -80,13 +82,21 @@ public class SelectionGUI extends GBFrame{
 			sortGradesButton.setVisible(false);
 			options.setVisible(false);
 		} else if (mi == outputMI) {
-
-		}
+			sortNameButton.setVisible(true);
+			sortGradesButton.setVisible(true);
+			LNameFld.setVisible(false);
+			ListArea.setVisible(true);
+			FNameFld.setVisible(false);
+			StudentList.setVisible(true);
+			EnterNameButton.setVisible(false);
+			enterGradesButton.setVisible(false);
+			options.setVisible(false);
+		}else if ()
 	}
 	
 	public void buttonClicked(JButton b) {
 		if (b == EnterNameButton) {
-			if (FNameFld.getText().isBlank()||LNameFld.getText().isBlank()) {
+			if (FNameFld.getText().isEmpty()||LNameFld.getText().isEmpty()) {
 				messageBox("Please Enter a First and Last Name");
 				return;
 			}

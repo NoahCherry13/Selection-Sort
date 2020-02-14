@@ -30,9 +30,10 @@ public class AllStudents {
 
 			int min_idx = i;
 			for (int j = i + 1; j < n; j++) {
-				if (studentList.get(j).getFName().toLowerCase().compareTo(studentList.get(min_idx).getFName().toLowerCase()) < 0)
-					;
-				min_idx = j;
+				if (studentList.get(j).getFName().toLowerCase()
+						.compareTo(studentList.get(min_idx).getFName().toLowerCase()) < 0) {
+					min_idx = j;
+				}
 			}
 
 			Student temp = studentList.get(min_idx);
@@ -49,9 +50,9 @@ public class AllStudents {
 
 			int min_idx = i;
 			for (int j = i + 1; j < n; j++) {
-				if (studentList.get(j).getLName().compareTo(studentList.get(min_idx).getLName()) > 0)
-					;
-				min_idx = j;
+				if (studentList.get(j).getLName().compareTo(studentList.get(min_idx).getLName()) > 0) {
+					min_idx = j;
+				}
 			}
 
 			Student temp = studentList.get(min_idx);
@@ -63,21 +64,20 @@ public class AllStudents {
 	public void addStudent(Student s) {
 		studentList.add(s);
 	}
-	
+
 	public ArrayList<Student> getFList() {
 		sortFName();
 		return studentList;
 	}
-	
+
 	public ArrayList<Student> getLList() {
 		sortLName();
 		return studentList;
 	}
-	
+
 	public ArrayList<Student> getSList() {
 		sortGrades();
 		return studentList;
 	}
-	
-	
+
 }
