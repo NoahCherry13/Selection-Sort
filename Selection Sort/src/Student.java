@@ -19,13 +19,19 @@ public class Student {
 		
 	}
 	
-	public void addQuizGrade(int qg) {
+	public void addQuizGrade(int qg) throws GradeOverflowException{
 		quizCount ++;
+		if (quizCount >8) {
+			throw new GradeOverflowException("Too Many Quiz Scores");
+		}
 		quizGrade += qg;
 	}
 	
-	public void addTestGrade(int tg) {
+	public void addTestGrade(int tg) throws GradeOverflowException{
 		testCount ++;
+		if (testCount >5) {
+			throw new GradeOverflowException("Too Many Test Scores");
+		}
 		testGrade += tg;
 	}
 	
@@ -34,8 +40,28 @@ public class Student {
 		hwGrade += hg;
 	}
 	
+	public double calculateQuiz() {
+		if (quizCount > 0) {
+			return 0.3*(quizGrade/quizCount);
+		}
+		return 0;
+	}
+	
+	public double calculateTest() {
+		if (testCount > 0) {
+			return 0.5*(testGrade/testCount);
+		}
+		return 0;
+	}
+	public double calculateHW() {
+		if (hwCount > 0) {
+			return 0.2*(hwGrade/hwCount);
+		}
+		return 0;
+	}
+	
 	public double getAverage() {
-		average = 0.5*(testGrade/testCount)+0.3*(quizGrade/quizCount)+0.2*(hwGrade/hwCount);
+		average = calculateTest()+calculateQuiz()+calculateHW();
 		return average;
 	}
 	
